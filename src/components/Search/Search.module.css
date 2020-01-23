@@ -1,0 +1,24 @@
+.form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.input{
+    border-radius: 5px;
+    width: 300px;
+    border: 1px solid grey;
+    padding: 5px;
+}
+.input:focus{
+    outline: none;
+}
+.title{
+    text-align: center;
+}
+.form-group{
+    margin-bottom: 0;
+}

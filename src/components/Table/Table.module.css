@@ -1,0 +1,45 @@
+
+.header{
+    text-align: center;
+    margin: 0;
+}
+.divFix{
+    width: 95px;
+}
+.aboveTheTable{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.addBtn{
+}
+.arrow{
+    width: 9px;
+}
+.row1:hover,.row2:hover,.row3:hover{
+    background: lightgrey;
+    cursor: pointer;
+}
+.paginator{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+.createUser{
+    display: flex;
+}
+.id{
+
+}
+.firstName{
+
+}
+.lastName{
+
+}
+.email{
+
+}
+.number{
+
+}
