@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "../Table.module.css";
 
-const User = ({u}) => {
-    return <tr className={styles.row1}>
+const User = ({u, setChosenUser}) => {
+
+    return <tr className={styles.row1} onClick={() => setChosenUser(u)}>
         <th scope="row">{u.id}</th>
         <td>{u.firstName}</td>
         <td>{u.lastName}</td>

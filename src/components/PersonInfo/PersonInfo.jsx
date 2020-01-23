@@ -1,16 +1,31 @@
 import React from "react";
 import styles from "./PersonInfo.module.css";
+import {connect} from "react-redux";
 
-const PersonInfo = (props) => {
-    return <div>
-            <h4>Выбран пользователь: <b>Sue Corson</b></h4>
-            <div>Описание:</div>
-            <textarea disabled className={styles.description}>et lacus magna dolor...</textarea>
-            <div>Адрес проживания: <b>9792 Mattis Ct</b></div>
-            <div>Город: <b>Waukesha</b></div>
-            <div>Провинция/штат: <b>WI</b></div>
-            <div>Индекс: <b>22178</b></div>
-    </div>
+const PersonInfo = ({chosenUser}) => {
+
+    return <>
+        {Object.keys(chosenUser).length === 0 ? undefined
+        : <div>
+                <h4>Выбран пользователь: <b>{chosenUser.firstName} {chosenUser.lastName}</b></h4>
+                <div>Электронная почта: <b>{chosenUser.email}</b></div>
+                <div>Номер телефона: <b>{chosenUser.phone}</b></div>
+                <div>Описание:</div>
+                <textarea className={styles.description} value={chosenUser.description}/>
+                <div>Адрес проживания: <b>{chosenUser.address.streetAddress}</b></div>
+                <div>Город: <b>{chosenUser.address.city}</b></div>
+                <div>Провинция/штат: <b>{chosenUser.address.state}</b></div>
+                <div>Индекс: <b>{chosenUser.address.zip}</b></div>
+            </div>
+        }
+
+    </>
 }
 
-export default PersonInfo
+const mapStateToProps = (state) => {
+    return {
+        chosenUser: state.usersReducer.chosenUser
+    }
+}
+
+export default connect(mapStateToProps, {})(PersonInfo)

@@ -4,7 +4,7 @@ import styles from './Table.module.css'
 import arrowDown from '../../assets/images/icons/arrDown.svg'
 import arrowUp from '../../assets/images/icons/arrUp.svg'
 import CreateUserReduxForm from "./CreateUserForm/CreateUserForm";
-import {getUsers} from "../../redux/users-reducer";
+import {getUsers, setChosenUser, usersReducer} from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import User from "./User/User";
 
@@ -41,7 +41,7 @@ const Table = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.users.map(u => <User u={u} key={u.id}/>)}
+            {props.users.map(u => <User u={u} key={u.id} setChosenUser={props.setChosenUser}/>)}
 
             </tbody>
         </table>
@@ -67,10 +67,12 @@ const Table = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    let usersReducer = state.usersReducer
     return {
-        rows: state.usersReducer.rows,
-        users: state.usersReducer.users
+        rows: usersReducer.rows,
+        users: usersReducer.users,
+        chosenUser: usersReducer.chosenUser,
     }
 }
 
-export default connect(mapStateToProps, {getUsers})(Table)
+export default connect(mapStateToProps, {getUsers, setChosenUser})(Table)
