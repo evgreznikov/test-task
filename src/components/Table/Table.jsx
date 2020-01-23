@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import styles from './Table.module.css'
 import arrowDown from '../../assets/images/icons/arrDown.svg'
 import arrowUp from '../../assets/images/icons/arrUp.svg'
-import CreateUserReduxForm from "./CreateUserForm/CreateUserForm";
-import {getUsers, setChosenUser, usersReducer} from "../../redux/users-reducer";
+import CreateUserForm from "./CreateUserForm/CreateUserForm";
+import {addNewUser, getUsers, setChosenUser, usersReducer} from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import User from "./User/User";
 
@@ -17,6 +17,14 @@ const Table = (props) => {
     }, [])
 
     const onSubmit = (formData) => {
+        let user = {
+            id: formData.id,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone
+        }
+        props.addNewUser(user)
         setEditMode(false)
     }
 
@@ -24,11 +32,12 @@ const Table = (props) => {
         <div className={styles.aboveTheTable}>
             <div className={styles.divFix}></div>
             <h2 className={styles.header}>Пользователи</h2>
-            {!editMode && <button onClick={() => {
-                setEditMode(true)
-            }} className={`btn btn-primary ${styles.addBtn}`}>Добавить</button>}
+            {!editMode ? <button onClick={() => {setEditMode(true)}}
+                                  className={`btn btn-primary ${styles.addBtn}`}>Добавить</button>
+                : <div className={styles.divFix}></div>
+            }
         </div>
-        {editMode && <CreateUserReduxForm onSubmit={onSubmit}/>}
+        {editMode && <CreateUserForm onSubmit={onSubmit}/>}
 
         <table className={`table table-bordered ${styles.table}`}>
             <thead>
@@ -75,4 +84,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getUsers, setChosenUser})(Table)
+export default connect(mapStateToProps, {getUsers, setChosenUser, addNewUser})(Table)

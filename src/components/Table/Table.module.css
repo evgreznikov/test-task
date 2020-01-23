@@ -28,18 +28,18 @@
 .createUser{
     display: flex;
 }
-.id{
-
+.form{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 20px 0;
 }
-.firstName{
-
+.item{
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 6px;
+    margin-left: 10px;
 }
-.lastName{
-
-}
-.email{
-
-}
-.number{
-
-}
+.item:first-child{
+     margin-left: 0px;
+ }

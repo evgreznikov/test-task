@@ -11,9 +11,9 @@ import {compose} from "redux";
 function App() {
   return (
     <div className="container">
-      <Search></Search>
-      <Table></Table>
-      <PersonInfo></PersonInfo>
+      <Search />
+      <Table />
+      <PersonInfo />
     </div>
   );
 }

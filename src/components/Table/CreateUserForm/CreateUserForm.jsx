@@ -1,19 +1,23 @@
 import React from "react";
-import {CreateField, Text} from "../../common/FormsControl/FormsControl";
 import styles from "../Table.module.css"
 import {reduxForm} from "redux-form";
+import {CreateField, Text} from "../../common/FormsControl/FormsControl";
+import {required} from "../../../utils/validators/validators";
 
 const CreateUserForm = (props) => {
-    return  <form onSubmit={props.handleSubmit} className={styles.createUser}>
-        {CreateField('Id', 'input', Text, 'id', [require], styles.id)}
-        {CreateField('First name', 'input', Text, 'firstName', [require], styles.firstName)}
-        {CreateField('Last name', 'input', Text, 'lastName', [require], styles.lastName)}
-        {CreateField('Email', 'input', Text, 'email', [require], styles.email)}
-        {CreateField('Phone number', 'input', Text, 'number', [require], styles.number)}
-        <button>Добавить</button>
+    return <form onSubmit={props.handleSubmit} className={styles.form}>
+            {CreateField("Id", "input", Text, "id",
+                [required], styles.item)}
+            {CreateField("First name", "input", Text, "firstName",
+                [required], styles.item)}
+            {CreateField("Last name", "input", Text, "lastName",
+                [required], styles.item)}
+            {CreateField("Email", "input", Text, "email",
+                [required], styles.item)}
+            {CreateField("Phone", "input", Text, "phone",
+                [required], styles.item)}
+        <button className={`btn btn-primary`}>Добавить</button>
     </form>
 }
 
-const CreateUserReduxForm = reduxForm({form: 'createUser'})(CreateUserForm)
-
-export default CreateUserReduxForm
+export default reduxForm({form: 'createUser'})(CreateUserForm)

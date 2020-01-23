@@ -5,6 +5,7 @@ import {usersReducer} from "./users-reducer";
 
 let reducers = combineReducers({
     usersReducer: usersReducer,
+    form: formReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

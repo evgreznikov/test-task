@@ -11,11 +11,11 @@ const PersonInfo = ({chosenUser}) => {
                 <div>Электронная почта: <b>{chosenUser.email}</b></div>
                 <div>Номер телефона: <b>{chosenUser.phone}</b></div>
                 <div>Описание:</div>
-                <textarea className={styles.description} value={chosenUser.description}/>
-                <div>Адрес проживания: <b>{chosenUser.address.streetAddress}</b></div>
-                <div>Город: <b>{chosenUser.address.city}</b></div>
-                <div>Провинция/штат: <b>{chosenUser.address.state}</b></div>
-                <div>Индекс: <b>{chosenUser.address.zip}</b></div>
+                <textarea className={styles.description} value={chosenUser.description && chosenUser.description}/>
+                <div>Адрес проживания: <b>{chosenUser.address.streetAddress && chosenUser.address.streetAddress}</b></div>
+                <div>Город: <b>{chosenUser.address.city && chosenUser.address.city}</b></div>
+                <div>Провинция/штат: <b>{chosenUser.address.state && chosenUser.address.state}</b></div>
+                <div>Индекс: <b>{chosenUser.address.zip && chosenUser.address.zip}</b></div>
             </div>
         }
 

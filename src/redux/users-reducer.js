@@ -3,6 +3,7 @@ import React from "react";
 
 const SET_USERS = 'SET-USERS'
 const SET_CHOSEN_USER = 'SET-CHOSEN-USER'
+const ADD_NEW_USER = 'ADD-NEW-USER'
 
 let initialState = {
     users: [],
@@ -24,6 +25,12 @@ export const usersReducer = (state = initialState, action) => {
                 chosenUser: action.user
             }
         }
+        case ADD_NEW_USER:{
+            return{
+                ...state,
+                users: [action.user, ...state.users]
+            }
+        }
         default:
             return state
     }
@@ -31,6 +38,7 @@ export const usersReducer = (state = initialState, action) => {
 
 export const setUsers = (users) => ({type: SET_USERS, users})
 export const setChosenUser = (user) => ({type: SET_CHOSEN_USER, user})
+export const addNewUser = (user) => ({type: ADD_NEW_USER, user})
 
 export const getUsers = (rows) =>
     async (dispatch) => {
