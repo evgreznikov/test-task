@@ -18,7 +18,6 @@ const PersonInfo = ({chosenUser}) => {
                 <div>Индекс: <b>{chosenUser.address.zip && chosenUser.address.zip}</b></div>
             </div>
         }
-
     </>
 }
 

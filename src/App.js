@@ -7,11 +7,26 @@ import store from "./redux/store";
 import {BrowserRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
+import {find, setPartOfUsers, refreshUsers} from "./redux/users-reducer";
 
-function App() {
+function App(props) {
+    const onSubmit = (formData) => {
+        if (!formData.search){
+            props.refreshUsers()
+            props.setPartOfUsers()
+        } else {
+            props.refreshUsers()
+            debugger
+            props.find(formData.search, formData.select)
+            props.setPartOfUsers()
+        }
+    }
+    let initialValues = {
+        select: "id"
+    }
   return (
     <div className="container">
-      <Search />
+      <Search onSubmit={onSubmit} initialValues={initialValues} />
       <Table />
       <PersonInfo />
     </div>
@@ -23,7 +38,7 @@ const mapStateToProps = (state) => ({
 })
 
 let AppContainer = compose(
-    connect(mapStateToProps, {}))
+    connect(mapStateToProps, {find, setPartOfUsers, refreshUsers}))
 (App)
 
 let TestApp = (props) => {

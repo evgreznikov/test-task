@@ -7,9 +7,12 @@ const ADD_NEW_USER = 'ADD-NEW-USER'
 const SET_NEW_ACTIVE_PAGE = 'SET-NEW-ACTIVE-PAGE'
 const SET_PART_OF_USERS = 'SET-PART-OF-USERS'
 const FILTER_ID = 'FILTER-ID'
+const FIND = "FIND"
+const REFRESH_USERS = "REFRESH-USERS"
 
 let initialState = {
     users: [],
+    copyOfUsers: [],
     rows: 32,
     chosenUser: {},
     pageSize: 5,
@@ -24,38 +27,60 @@ export const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: [...action.users],
+                copyOfUsers: [...action.users],
                 portionOfUsers: action.users.slice(0, state.pageSize)
             }
         }
-        case SET_CHOSEN_USER:{
-            return{
+        case SET_CHOSEN_USER: {
+            return {
                 ...state,
                 chosenUser: action.user
             }
         }
-        case ADD_NEW_USER:{
-            return{
+        case ADD_NEW_USER: {
+            return {
                 ...state,
                 users: [action.user, ...state.users]
             }
         }
-        case SET_NEW_ACTIVE_PAGE:{
-            return{
+        case SET_NEW_ACTIVE_PAGE: {
+            return {
                 ...state,
                 currentPage: action.pageNumber
             }
         }
-        case SET_PART_OF_USERS:{
-            return{
+        case SET_PART_OF_USERS: {
+            return {
                 ...state,
-                portionOfUsers: state.users.slice(state.currentPage  * state.pageSize - state.pageSize,
-                    state.currentPage  * state.pageSize)
+                portionOfUsers: state.users.slice(state.currentPage * state.pageSize - state.pageSize,
+                    state.currentPage * state.pageSize)
             }
         }
-        case FILTER_ID:{
-            return{
+        case FILTER_ID: {
+            return {
                 ...state,
-               users: [...action.users]
+                users: [...action.users]
+            }
+        }
+        case FIND: {
+            return {
+                ...state,
+                copyOfUsers: [...state.users],
+                users: state.users.filter(u => {
+                    if (action.search === "") {
+                        return u
+                    } else if (u.hasOwnProperty(action.prop)) {
+                        if (u[action.prop].toString().includes(action.search)) {
+                            return u
+                        }
+                    }
+                })
+            }
+        }
+        case REFRESH_USERS: {
+            return {
+                ...state,
+                users: [...state.copyOfUsers]
             }
         }
         default:
@@ -69,21 +94,24 @@ export const addNewUser = (user) => ({type: ADD_NEW_USER, user})
 export const setNewActivePage = (pageNumber) => ({type: SET_NEW_ACTIVE_PAGE, pageNumber})
 export const setPartOfUsers = () => ({type: SET_PART_OF_USERS})
 export const setFilteredUsers = (users) => ({type: FILTER_ID, users})
+export const find = (search, prop) => ({type: FIND, search, prop})
+export const refreshUsers = () => ({type: REFRESH_USERS})
+
 
 export const getUsers = (rows) =>
     async (dispatch) => {
-    try {
-        let data = await api.getUsers(rows)
-        let newData = data.map(u => {
-            let phone = parseInt(u.phone.replace(/\D+/g,""))
-            let user = {
-                ...u,
-                phone: phone
-            }
-            return user
-        })
-        dispatch(setUsers(newData))
-    } catch (error) {
-        alert(error.message)
+        try {
+            let data = await api.getUsers(rows)
+            let newData = data.map(u => {
+                let phone = parseInt(u.phone.replace(/\D+/g, ""))
+                let user = {
+                    ...u,
+                    phone: phone
+                }
+                return user
+            })
+            dispatch(setUsers(newData))
+        } catch (error) {
+            alert(error.message)
+        }
     }
-}

@@ -20,11 +20,11 @@ const Table = (props) => {
 
     let [editMode, setEditMode] = useState(false)
 
-    let [filteredById, setFilteredById] = useState(true)
-    let [filteredByPhone, setFilteredByPhone] = useState(true)
-    let [filteredByFirstName, setFilteredByFirstName] = useState(true)
-    let [filteredByLastName, setFilteredByLastName] = useState(true)
-    let [filteredByEmail, setFilteredByEmail] = useState(true)
+    let [filteredById, setFilteredById] = useState(false)
+    let [filteredByPhone, setFilteredByPhone] = useState(false)
+    let [filteredByFirstName, setFilteredByFirstName] = useState(false)
+    let [filteredByLastName, setFilteredByLastName] = useState(false)
+    let [filteredByEmail, setFilteredByEmail] = useState(false)
 
 
     useEffect(() => {
@@ -170,35 +170,35 @@ const Table = (props) => {
                 onClick={() => filteredById ? filterByDescending("id") : filterByAscending("id")}>
                     <div className={styles.property}>
                         <span>Id</span>
-                        <img src={filteredById ? arrowDown : arrowUp} alt="arrow" className={styles.arrow}/>
+                        <img src={!filteredById ? arrowDown : arrowUp} alt="arrow" className={styles.arrow}/>
                     </div>
                 </th>
                 <th scope="col" onMouseOver={() => onMouseOver('prop2')} onMouseOut={() => onMouseOut('prop2')}
                 onClick={() => filteredByFirstName ? filterWordsDescending("firstName") : filterWordsAscending("firstName")}>
                     <div className={styles.property}>
                         <span>First name</span>
-                        <img src={filteredByFirstName ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
+                        <img src={!filteredByFirstName ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
                     </div>
                 </th>
                 <th scope="col" onMouseOver={() => onMouseOver('prop3')} onMouseOut={() => onMouseOut('prop3')}
                     onClick={() => filteredByLastName ? filterWordsDescending("lastName") : filterWordsAscending("lastName")}>
                     <div className={styles.property}>
                         <span>Last name</span>
-                        <img src={filteredByLastName ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
+                        <img src={!filteredByLastName ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
                     </div>
                 </th>
                 <th scope="col" onMouseOver={() => onMouseOver('prop4')} onMouseOut={() => onMouseOut('prop4')}
                     onClick={() => filteredByEmail ? filterWordsDescending("email") : filterWordsAscending("email")}>
                     <div className={styles.property}>
                         <span>Email</span>
-                        <img src={filteredByEmail ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
+                        <img src={!filteredByEmail ? arrowDown : arrowUp} alt="arrowDown" className={styles.arrow}/>
                     </div>
                 </th>
                 <th scope="col" onMouseOver={() => onMouseOver('prop5')} onMouseOut={() => onMouseOut('prop5')}
                     onClick={() => filteredByPhone ? filterByDescending("phone") : filterByAscending("phone")}>
                     <div className={styles.property}>
                         <span>Phone number</span>
-                        <img src={filteredByPhone ? arrowDown : arrowUp} alt="arrow" className={styles.arrow}/>
+                        <img src={!filteredByPhone ? arrowDown : arrowUp} alt="arrow" className={styles.arrow}/>
                     </div>
                 </th>
             </tr>
