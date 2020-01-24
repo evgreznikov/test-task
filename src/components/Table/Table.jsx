@@ -4,9 +4,10 @@ import styles from './Table.module.css'
 import arrowDown from '../../assets/images/icons/arrDown.svg'
 import arrowUp from '../../assets/images/icons/arrUp.svg'
 import CreateUserForm from "./CreateUserForm/CreateUserForm";
-import {addNewUser, getUsers, setChosenUser, usersReducer} from "../../redux/users-reducer";
+import {addNewUser, getUsers, setChosenUser, setNewActivePage, setPartOfUsers} from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import User from "./User/User";
+import Paginator from "../common/paginator/Paginator";
 
 const Table = (props) => {
 
@@ -25,15 +26,23 @@ const Table = (props) => {
             phone: formData.phone
         }
         props.addNewUser(user)
+        props.setPartOfUsers()
         setEditMode(false)
+    }
+
+    const onPageChanged = (pageNumber) => {
+        props.setNewActivePage(pageNumber)
+        props.setPartOfUsers()
     }
 
     return <div>
         <div className={styles.aboveTheTable}>
             <div className={styles.divFix}></div>
             <h2 className={styles.header}>Пользователи</h2>
-            {!editMode ? <button onClick={() => {setEditMode(true)}}
-                                  className={`btn btn-primary ${styles.addBtn}`}>Добавить</button>
+            {!editMode ? <button onClick={() => {
+                    setEditMode(true)
+                }}
+                                 className={`btn btn-primary ${styles.addBtn}`}>Добавить</button>
                 : <div className={styles.divFix}></div>
             }
         </div>
@@ -50,28 +59,14 @@ const Table = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.users.map(u => <User u={u} key={u.id} setChosenUser={props.setChosenUser}/>)}
+            {props.portionOfUsers.map(u => <User u={u} key={u.id} setChosenUser={props.setChosenUser}/>)}
 
             </tbody>
         </table>
-        <nav aria-label="..." className={styles.paginator}>
-            <ul className="pagination">
-                <li className="page-item disabled">
-                    <span className="page-link">Previous</span>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item active" aria-current="page">
-      <span className="page-link">
-        2
-        <span className="sr-only">(current)</span>
-      </span>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item">
-                    <a className="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+
+        <Paginator onPageChanged={onPageChanged} pageSize={props.pageSize} totalCount={props.users.length}
+                   portionSize={props.portionSize} currentPage={props.currentPage}/>
+
     </div>
 }
 
@@ -81,7 +76,11 @@ const mapStateToProps = (state) => {
         rows: usersReducer.rows,
         users: usersReducer.users,
         chosenUser: usersReducer.chosenUser,
+        currentPage: usersReducer.currentPage,
+        portionSize: usersReducer.portionSize,
+        pageSize: usersReducer.pageSize,
+        portionOfUsers: usersReducer.portionOfUsers
     }
 }
 
-export default connect(mapStateToProps, {getUsers, setChosenUser, addNewUser})(Table)
+export default connect(mapStateToProps, {getUsers, setChosenUser, addNewUser, setNewActivePage, setPartOfUsers})(Table)

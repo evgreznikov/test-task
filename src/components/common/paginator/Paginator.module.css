@@ -1,0 +1,22 @@
+.page{
+    font-size: 20px;
+    font-weight: 200;
+}
+.paginator ul{
+    display: flex;
+    justify-content: center;
+}
+.selectedPage{
+    font-weight: bold;
+    font-size: 20px;
+
+}
+.selectedPage, .page{
+    margin-right: 10px;
+}
+.selectedPage, .page:hover{
+    cursor: pointer;
+}
+.prevBtn{
+    margin-right: 10px;
+}
