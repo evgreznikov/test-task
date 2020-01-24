@@ -41,5 +41,13 @@
     margin-left: 10px;
 }
 .item:first-child{
-     margin-left: 0px;
+     margin-left: 0;
  }
+.property{
+    display: flex;
+    justify-content: space-between;
+}
+.table thead tr th:hover{
+    cursor: pointer;
+    background: #bbbbbb;
+}

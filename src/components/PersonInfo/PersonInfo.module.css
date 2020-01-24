@@ -1,5 +1,7 @@
 .description{
     border: none;
     resize: none;
+    width: 400px;
+    height: 100px;
     color: #000000;
 }

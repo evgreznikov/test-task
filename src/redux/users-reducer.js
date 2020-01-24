@@ -6,6 +6,7 @@ const SET_CHOSEN_USER = 'SET-CHOSEN-USER'
 const ADD_NEW_USER = 'ADD-NEW-USER'
 const SET_NEW_ACTIVE_PAGE = 'SET-NEW-ACTIVE-PAGE'
 const SET_PART_OF_USERS = 'SET-PART-OF-USERS'
+const FILTER_ID = 'FILTER-ID'
 
 let initialState = {
     users: [],
@@ -51,6 +52,12 @@ export const usersReducer = (state = initialState, action) => {
                     state.currentPage  * state.pageSize)
             }
         }
+        case FILTER_ID:{
+            return{
+                ...state,
+               users: [...action.users]
+            }
+        }
         default:
             return state
     }
@@ -61,12 +68,21 @@ export const setChosenUser = (user) => ({type: SET_CHOSEN_USER, user})
 export const addNewUser = (user) => ({type: ADD_NEW_USER, user})
 export const setNewActivePage = (pageNumber) => ({type: SET_NEW_ACTIVE_PAGE, pageNumber})
 export const setPartOfUsers = () => ({type: SET_PART_OF_USERS})
+export const setFilteredUsers = (users) => ({type: FILTER_ID, users})
 
 export const getUsers = (rows) =>
     async (dispatch) => {
     try {
         let data = await api.getUsers(rows)
-        dispatch(setUsers(data))
+        let newData = data.map(u => {
+            let phone = parseInt(u.phone.replace(/\D+/g,""))
+            let user = {
+                ...u,
+                phone: phone
+            }
+            return user
+        })
+        dispatch(setUsers(newData))
     } catch (error) {
         alert(error.message)
     }
