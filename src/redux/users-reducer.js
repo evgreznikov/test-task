@@ -9,16 +9,18 @@ const SET_PART_OF_USERS = 'SET-PART-OF-USERS'
 const FILTER_ID = 'FILTER-ID'
 const FIND = "FIND"
 const REFRESH_USERS = "REFRESH-USERS"
+const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 
 let initialState = {
     users: [],
     copyOfUsers: [],
-    rows: 32,
+    rows: 0,
     chosenUser: {},
-    pageSize: 5,
-    portionSize: 3,
+    pageSize: 15,
+    portionSize: 7,
     currentPage: 1,
     portionOfUsers: [],
+    isFetching: false,
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -83,6 +85,12 @@ export const usersReducer = (state = initialState, action) => {
                 users: [...state.copyOfUsers]
             }
         }
+        case TOGGLE_IS_FETCHING:{
+            return{
+                ...state,
+                isFetching: action.value
+            }
+        }
         default:
             return state
     }
@@ -96,11 +104,12 @@ export const setPartOfUsers = () => ({type: SET_PART_OF_USERS})
 export const setFilteredUsers = (users) => ({type: FILTER_ID, users})
 export const find = (search, prop) => ({type: FIND, search, prop})
 export const refreshUsers = () => ({type: REFRESH_USERS})
-
+export const toggleFetching = (value) => ({type: TOGGLE_IS_FETCHING, value})
 
 export const getUsers = (rows) =>
     async (dispatch) => {
         try {
+            dispatch(toggleFetching(true))
             let data = await api.getUsers(rows)
             let newData = data.map(u => {
                 let phone = parseInt(u.phone.replace(/\D+/g, ""))
@@ -110,6 +119,7 @@ export const getUsers = (rows) =>
                 }
                 return user
             })
+            dispatch(toggleFetching(false))
             dispatch(setUsers(newData))
         } catch (error) {
             alert(error.message)

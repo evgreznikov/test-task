@@ -6,6 +6,16 @@
 .divFix{
     width: 95px;
 }
+.firstScreen{
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%);
+}
+.firstScreenBtn{
+    margin-right: 20px;
+}
 .aboveTheTable{
     display: flex;
     justify-content: space-between;
@@ -46,6 +56,9 @@
 .property{
     display: flex;
     justify-content: space-between;
+}
+.table thead tr th{
+    user-select: none;
 }
 .table thead tr th:hover{
     cursor: pointer;

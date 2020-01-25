@@ -15,11 +15,11 @@ export const Text = ({ input, meta, ...props }) => {
                 {props.type === "select" &&
                 <div className="form-group" style={{marginBottom: "0px"}} {...input} {...props}>
                     <select className="form-control" id="exampleFormControlSelect1">
-                        <option value={"id"}>Id</option>
-                        <option value={"firstName"}>First name</option>
-                        <option value={"lastName"}>Last name</option>
-                        <option value={"email"}>Email</option>
-                        <option value={"phone"}>Phone number</option>
+                        <option value={"id"}>id</option>
+                        <option value={"firstName"}>Имя</option>
+                        <option value={"lastName"}>Фамилия</option>
+                        <option value={"email"}>Почта</option>
+                        <option value={"phone"}>Телефон</option>
                     </select>
                 </div>}
             </div>

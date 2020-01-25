@@ -20,7 +20,7 @@ const Paginator = ({totalCount, pageSize, currentPage, onPageChanged, portionSiz
         <ul className="pagination">
             {portionNumber > 1 ?
                 <li className="page-item" onClick={() => (setPortionNumber(portionNumber - 1))}>
-                    <span className="page-link">Previous</span>
+                    <span className="page-link">Назад</span>
                 </li> : undefined}
 
             {pages
@@ -37,7 +37,7 @@ const Paginator = ({totalCount, pageSize, currentPage, onPageChanged, portionSiz
 
             {portionCount > portionNumber ?
                 <li className="page-item" onClick={() => (setPortionNumber(portionNumber + 1))}>
-                    <span className="page-link">Next</span>
+                    <span className="page-link">Далее</span>
                 </li> : undefined}
         </ul>
     </nav>

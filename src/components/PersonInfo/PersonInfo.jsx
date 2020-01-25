@@ -9,7 +9,9 @@ const PersonInfo = ({chosenUser}) => {
         : <div>
                 <h4>Выбран пользователь: <b>{chosenUser.firstName} {chosenUser.lastName}</b></h4>
                 <div>Электронная почта: <b>{chosenUser.email}</b></div>
-                <div>Номер телефона: <b>{chosenUser.phone}</b></div>
+                <div>Номер телефона: <b>
+                    ({chosenUser.phone.toString().slice(0, 3)}){chosenUser.phone.toString().slice(3, 6)}-{chosenUser.phone.toString().slice(6,10)}
+                </b></div>
                 <div>Описание:</div>
                 <textarea className={styles.description} value={chosenUser.description && chosenUser.description}/>
                 <div>Адрес проживания: <b>{chosenUser.address.streetAddress && chosenUser.address.streetAddress}</b></div>
