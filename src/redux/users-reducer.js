@@ -42,7 +42,8 @@ export const usersReducer = (state = initialState, action) => {
         case ADD_NEW_USER: {
             return {
                 ...state,
-                users: [action.user, ...state.users]
+                users: [action.user, ...state.users],
+                copyOfUsers: [action.user, ...state.users]
             }
         }
         case SET_NEW_ACTIVE_PAGE: {
@@ -69,10 +70,16 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                 copyOfUsers: [...state.users],
                 users: state.users.filter(u => {
-                    if (action.search === "") {
+                    if (action.search === ""){
                         return u
-                    } else if (u.hasOwnProperty(action.prop)) {
+                    } else if (u.hasOwnProperty(action.prop) && action.coincidence === "partial") {
+                        debugger
                         if (u[action.prop].toString().includes(action.search)) {
+                            return u
+                        }
+                    } else if (u.hasOwnProperty(action.prop) && action.coincidence === "complete"){
+                        debugger
+                        if (u[action.prop].toString() === action.search) {
                             return u
                         }
                     }
@@ -102,7 +109,7 @@ export const addNewUser = (user) => ({type: ADD_NEW_USER, user})
 export const setNewActivePage = (pageNumber) => ({type: SET_NEW_ACTIVE_PAGE, pageNumber})
 export const setPartOfUsers = () => ({type: SET_PART_OF_USERS})
 export const setFilteredUsers = (users) => ({type: FILTER_ID, users})
-export const find = (search, prop) => ({type: FIND, search, prop})
+export const find = (search, prop, coincidence) => ({type: FIND, search, prop, coincidence})
 export const refreshUsers = () => ({type: REFRESH_USERS})
 export const toggleFetching = (value) => ({type: TOGGLE_IS_FETCHING, value})
 
