@@ -9,12 +9,9 @@ export const Text = ({ input, meta, ...props }) => {
         <div className={`${styles.formControl} ${hasError && styles.error}`}>
             <div>
                 {props.type === "textarea" && <textarea {...input} {...props} />}
-<<<<<<< HEAD
                 {props.type === "input" || props.type === "password" || props.type === "checkbox"
                     ? <input {...input} {...props}/> : undefined}
-=======
                 {props.type === "input" || props.type === "password" || props.type === "checkbox" && <input {...input} {...props}/>}
->>>>>>> e17adcbe6f62f0ca9c278059f524dc034809caf7
                 {props.type === "select" && input.name === "select" &&
                 <div className="form-group" style={{marginBottom: "0px"}} {...input} {...props}>
                     <select className="form-control">
