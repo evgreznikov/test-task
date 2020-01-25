@@ -149,32 +149,34 @@ const Table = (props) => {
     }
 
     const onSubmitSearch = (formData) => {
+        debugger
         if (!formData.search) {
             props.refreshUsers()
             props.setPartOfUsers()
         } else {
             props.refreshUsers()
-            props.find(formData.search, formData.select)
+            props.find(formData.search, formData.select, formData.coincidence)
             props.setPartOfUsers()
         }
     }
     let initialValues = {
-        select: "id"
+        select: "id",
+        coincidence: "partial"
     }
 
     return <div>
         {firstTime ? <div className={styles.firstScreen}>
-                <h2>Сколько данных нужно?</h2>
+                <h2>Сколько пользователей нужно?</h2>
                 <div>
                     <button onClick={() => {
                         setFirstTime(false)
                         props.getUsers(32)
-                    }} className={`btn btn-primary ${styles.firstScreenBtn}`}>Мало данных
+                    }} className={`btn btn-primary ${styles.firstScreenBtn}`}>Мало пользователей
                     </button>
                     <button onClick={() => {
                         setFirstTime(false)
                         props.getUsers(1000)
-                    }} className='btn btn-primary'>Много данных
+                    }} className='btn btn-primary'>Много пользователей
                     </button>
                 </div>
             </div>

@@ -17,6 +17,7 @@ const Search = (props) => {
                     [maxLength200], styles.input)}
             </div>
             {CreateField("", "select", Text, "select")}
+            {CreateField("", "select", Text, "coincidence")}
             <button className="btn btn-info">Найти</button>
         </form>
     </div>

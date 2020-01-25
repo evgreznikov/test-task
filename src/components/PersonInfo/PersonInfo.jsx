@@ -3,7 +3,7 @@ import styles from "./PersonInfo.module.css";
 import {connect} from "react-redux";
 
 const PersonInfo = ({chosenUser}) => {
-
+    debugger
     return <>
         {Object.keys(chosenUser).length === 0 ? undefined
         : <div>
@@ -13,11 +13,13 @@ const PersonInfo = ({chosenUser}) => {
                     ({chosenUser.phone.toString().slice(0, 3)}){chosenUser.phone.toString().slice(3, 6)}-{chosenUser.phone.toString().slice(6,10)}
                 </b></div>
                 <div>Описание:</div>
-                <textarea className={styles.description} value={chosenUser.description && chosenUser.description}/>
-                <div>Адрес проживания: <b>{chosenUser.address.streetAddress && chosenUser.address.streetAddress}</b></div>
-                <div>Город: <b>{chosenUser.address.city && chosenUser.address.city}</b></div>
-                <div>Провинция/штат: <b>{chosenUser.address.state && chosenUser.address.state}</b></div>
-                <div>Индекс: <b>{chosenUser.address.zip && chosenUser.address.zip}</b></div>
+                {chosenUser.address && <>
+                    <textarea className={styles.description} value={chosenUser.description}/>
+                    <div>Адрес проживания: {chosenUser.address.streetAddress && <b>{chosenUser.address.streetAddress}</b>}</div>
+                    <div>Город: {chosenUser.address.city && <b>{chosenUser.address.city}</b>}</div>
+                    <div>Провинция/штат: {chosenUser.address.state && <b>{chosenUser.address.state}</b>}</div>
+                    <div>Индекс: {chosenUser.address.zip && <b>{chosenUser.address.zip}</b>}</div>
+                </>}
             </div>
         }
     </>
