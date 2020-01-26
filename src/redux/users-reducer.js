@@ -1,12 +1,11 @@
 import {api} from "../api/api"
-import React from "react";
 
 const SET_USERS = 'SET-USERS'
 const SET_CHOSEN_USER = 'SET-CHOSEN-USER'
 const ADD_NEW_USER = 'ADD-NEW-USER'
 const SET_NEW_ACTIVE_PAGE = 'SET-NEW-ACTIVE-PAGE'
 const SET_PART_OF_USERS = 'SET-PART-OF-USERS'
-const FILTER_ID = 'FILTER-ID'
+const SET_FILTERED_USERS = 'SET-FILTERED-USERS'
 const FIND = "FIND"
 const REFRESH_USERS = "REFRESH-USERS"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
@@ -16,7 +15,7 @@ let initialState = {
     copyOfUsers: [],
     rows: 0,
     chosenUser: {},
-    pageSize: 15,
+    pageSize: 10,
     portionSize: 7,
     currentPage: 1,
     portionOfUsers: [],
@@ -59,7 +58,7 @@ export const usersReducer = (state = initialState, action) => {
                     state.currentPage * state.pageSize)
             }
         }
-        case FILTER_ID: {
+        case SET_FILTERED_USERS: {
             return {
                 ...state,
                 users: [...action.users]
@@ -73,16 +72,15 @@ export const usersReducer = (state = initialState, action) => {
                     if (action.search === ""){
                         return u
                     } else if (u.hasOwnProperty(action.prop) && action.coincidence === "partial") {
-                        debugger
                         if (u[action.prop].toString().includes(action.search)) {
                             return u
                         }
                     } else if (u.hasOwnProperty(action.prop) && action.coincidence === "complete"){
-                        debugger
                         if (u[action.prop].toString() === action.search) {
                             return u
                         }
                     }
+                    return 0
                 })
             }
         }
@@ -108,7 +106,7 @@ export const setChosenUser = (user) => ({type: SET_CHOSEN_USER, user})
 export const addNewUser = (user) => ({type: ADD_NEW_USER, user})
 export const setNewActivePage = (pageNumber) => ({type: SET_NEW_ACTIVE_PAGE, pageNumber})
 export const setPartOfUsers = () => ({type: SET_PART_OF_USERS})
-export const setFilteredUsers = (users) => ({type: FILTER_ID, users})
+export const setFilteredUsers = (users) => ({type: SET_FILTERED_USERS, users})
 export const find = (search, prop, coincidence) => ({type: FIND, search, prop, coincidence})
 export const refreshUsers = () => ({type: REFRESH_USERS})
 export const toggleFetching = (value) => ({type: TOGGLE_IS_FETCHING, value})

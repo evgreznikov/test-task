@@ -26,9 +26,12 @@
 .arrow{
     width: 9px;
 }
-.row1:hover,.row2:hover,.row3:hover{
+.row:hover{
     background: lightgrey;
     cursor: pointer;
+}
+.notFound{
+    text-align: center;
 }
 .paginator{
     margin-bottom: 50px;

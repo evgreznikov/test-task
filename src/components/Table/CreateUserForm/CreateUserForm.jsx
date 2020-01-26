@@ -14,7 +14,7 @@ const CreateUserForm = (props) => {
                 [required], styles.item)}
             {CreateField("Почта", "input", Text, "email",
                 [required], styles.item)}
-            {CreateField("Телефон", "input", Text, "phone",
+            {CreateField("Телефон", "tel", Text, "phone",
                 [required], styles.item)}
         <button className={`btn btn-primary`}>Добавить</button>
     </form>

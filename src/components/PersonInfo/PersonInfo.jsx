@@ -3,7 +3,6 @@ import styles from "./PersonInfo.module.css";
 import {connect} from "react-redux";
 
 const PersonInfo = ({chosenUser}) => {
-    debugger
     return <>
         {Object.keys(chosenUser).length === 0 ? undefined
         : <div>
@@ -14,7 +13,7 @@ const PersonInfo = ({chosenUser}) => {
                 </b></div>
                 <div>Описание:</div>
                 {chosenUser.address && <>
-                    <textarea className={styles.description} value={chosenUser.description}/>
+                    <textarea className={styles.description} value={chosenUser.description} onChange={() => undefined}/>
                     <div>Адрес проживания: {chosenUser.address.streetAddress && <b>{chosenUser.address.streetAddress}</b>}</div>
                     <div>Город: {chosenUser.address.city && <b>{chosenUser.address.city}</b>}</div>
                     <div>Провинция/штат: {chosenUser.address.state && <b>{chosenUser.address.state}</b>}</div>

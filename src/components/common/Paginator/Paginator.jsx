@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from './Paginator.module.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import './../common.css'
+import {NavLink} from "react-router-dom";
 
 const Paginator = ({totalCount, pageSize, currentPage, onPageChanged, portionSize}) => {
     let pagesCount = Math.ceil(totalCount / pageSize)
@@ -30,7 +31,7 @@ const Paginator = ({totalCount, pageSize, currentPage, onPageChanged, portionSiz
                         currentPage !== p ? onPageChanged(p) : void (0)
                     }}>
                         {!currentPage
-                            ? <a className="page-link" href="#">{p}</a>
+                            ? <NavLink className="page-link" href="#">{p}</NavLink>
                             : <span className="page-link">{p}<span className="sr-only">(current)</span></span>}
                     </li>
                 })}

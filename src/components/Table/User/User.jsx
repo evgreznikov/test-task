@@ -3,7 +3,7 @@ import styles from "../Table.module.css";
 
 const User = ({u, setChosenUser}) => {
 
-    return <tr className={styles.row1} onClick={() => setChosenUser(u)}>
+    return <tr className={styles.row} onClick={() => setChosenUser(u)}>
         <th className={'prop1'} scope="row">{u.id}</th>
         <td className={'prop2'}>{u.firstName}</td>
         <td className={'prop3'}>{u.lastName}</td>

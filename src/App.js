@@ -1,36 +1,29 @@
 import React from 'react';
-import Table from "./components/Table/Table";
 import 'bootstrap/dist/css/bootstrap.css';
 import PersonInfo from "./components/PersonInfo/PersonInfo";
 import store from "./redux/store";
-import {BrowserRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
-import {compose} from "redux";
 import {find, setPartOfUsers, refreshUsers} from "./redux/users-reducer";
+import TableContainer from "./components/Table/TableContainer";
 
-function App(props) {
+function App() {
   return (
     <div className="container">
-      <Table />
+      <TableContainer />
       <PersonInfo />
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-    // initialized: state.app.initialized
 })
 
-let AppContainer = compose(
-    connect(mapStateToProps, {find, setPartOfUsers, refreshUsers}))
-(App)
+let AppContainer = connect(mapStateToProps, {find, setPartOfUsers, refreshUsers})(App)
 
 let TestApp = (props) => {
-    return <BrowserRouter>
-        <Provider store={store}>
+    return <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
 }
 
 export default TestApp;
